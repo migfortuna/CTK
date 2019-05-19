@@ -1,0 +1,67 @@
+<div class="container row">
+  <div class="col-sm-6">
+    <div class="card bg-secondary text-white container">
+      <div class="card-title">
+        <h2>Product Details</h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-5 font-weight-bold">Product ID</div>
+          <div class="col-md"><%= @product.id %></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-5 font-weight-bold">Brand</div>
+          <div class="col-md"><%= @product.brand %></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-5 font-weight-bold">
+            Product Type
+          </div>
+          <div class="col-md">
+            <%= @product.product_type %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-5 font-weight-bold">
+            Current Quantity
+          </div>
+          <div class="col-md">
+            <%= @product.quantity %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card bg-secondary text-white container">
+      <h2 class="card-title">Backlog Product</h2>
+      <div class="card-body">
+        <%= form_for @purchase_entry, url: create_backlog_path(@product.id), class: :form, method: :post do |form| %>
+        <% if @purchase_entry.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@purchase_entry.errors.count, "error") %> prohibited this purchase entry from being saved:</h2>
+          <ul>
+            <% @purchase_entry.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
+        <div class="field">
+          <%= form.label :product_qty %>
+          <%= form.number_field :product_qty %>
+        </div>
+        <div class="field">
+          <%= form.label :purchase_order_id, value: "Purchase Order ID" %>
+          <%= form.number_field :purchase_order_id %>
+        </div>
+        <div class="actions">
+          <%= form.submit 'Create Purchase Entry', class: "btn btn-primary" %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<h2>List of Purchase Orders</h2>
+<%= render 'purchase_orders/list_purchase_orders' %>

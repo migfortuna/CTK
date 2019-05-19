@@ -1,0 +1,26 @@
+<div class="sidenav text-white bg-dark">
+  <div class="container">
+    <h5>MAIN</h5>
+    <ul>
+      <% if current_user.rank == UsersHelper::ADMIN%>
+        <li><%= link_to "Current Inventory", products_path %></li>
+      <% end %>
+      <li><%= link_to "Inventory Requests", purchase_orders_path %></li>
+      <li><%= link_to "Year-End Reports", year_end_path %></li>
+      <li><%= link_to "Backlogs", backlogs_path %></li>
+      <% if current_user.rank == UsersHelper::ADMIN %>
+        <li><%= link_to "Delivery History", deliveries_path %></li>
+        <li><%= link_to "Release History" %></li>
+      <% end %>
+    </ul>
+    <h5>PEOPLE</h5>
+    <ul>
+      <li><%= link_to "Users", create_user_path %></li>
+      <li><%= link_to "View History", history_path %></li>
+    </ul>
+    <h5>SYSTEM</h5>
+    <ul>
+      <li><%= link_to "Log out", logout_path, method: :delete %></li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="navbar text-white d-flex flex-row-reverse">
+  <h4 class="p-2">
+    Hello, <%= current_user.username %>
+  </h4>
+
+  <% if current_user.rank == UsersHelper::ADMIN %>
+  	<span style="margin-left: 20px;"><%= "Admin User" %></span>
+  <% else %>
+  	<span style="margin-left: 20px;"><%= "Purchasing Section" %></span>
+  <% end %>
+
+</div>

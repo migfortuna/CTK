@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container mb-5">
+  <h4>What are you searching for?</h4>
+  <div class="row">
+    <div class="col-lg-auto">
+      <%= form_tag({controller: "products", action: "brandQuery"}, method: :get, class: :form) do |form| %>
+        <input id="brand_query"ntype="text" name="brand_query" placeholder="Brand Name">
+        <%= submit_tag 'Search', name: nil, class: "" %>
+      <% end %>
+    </div>
+    <div class="col-sm">
+      <button class="btn btn-primary"><%= link_to 'New Product', new_product_path %></button>
+    </div>
+  </div>
+</div>
+<table class="table text-white table-dark table-striped">
+  <thead class="bg-dark">
+    <tr>
+      <th>Brand</th>
+      <th>Product type</th>
+      <th>Quantity</th>
+      <th>Unit Price</th>
+      <th colspan="7">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.brand %></td>
+        <td><%= product.product_type %></td>
+        <td><%= product.quantity %></td>
+        <td><%= product.unit_price %></td>
+        <td><%= link_to 'IR', create_entry_form_path(product), class: "text-success" %></td>
+        <td><%= link_to 'Release', release_product_form_path(product), class: "text-success" %></td>
+        <td><%= link_to 'Backlog', backlog_form_path(product), class: "text-success" %></td>
+        <td><%= link_to 'Edit', edit_product_path(product), class: "text-warning"%></td>
+        <td ><%= link_to 'Delete', product, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-danger"%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
